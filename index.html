@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finovo - Money Manager &amp; Udhaar Book</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e1e0ff",
+                        "background": "#f7f9fb",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#7073ff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "emerald-deep": "#006c49",
+                        "emerald-gradient-end": "#059669",
+                        "on-secondary-fixed-variant": "#005236",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#474747",
+                        "outline-variant": "#cfc4c5",
+                        "outline": "#7e7576",
+                        "on-surface-variant": "#4c4546",
+                        "glass-border": "rgba(255, 255, 255, 0.2)",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-tint": "#5e5e5e",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#07006c",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-background": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "secondary": "#006c49",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#002113",
+                        "on-surface": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "on-error": "#ffffff",
+                        "glass-bg": "rgba(255, 255, 255, 0.05)",
+                        "surface": "#f7f9fb",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#1b1b1b",
+                        "primary-container": "#1b1b1b",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-container": "#00714d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#07006c",
+                        "inverse-primary": "#c6c6c6",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-container": "#848484",
+                        "tertiary": "#000000",
+                        "emerald-gradient-start": "#10b981",
+                        "secondary-container": "#6cf8bb",
+                        "surface-container": "#eceef0",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "container-max": "1280px",
+                        "md": "16px",
+                        "2xl": "64px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .emerald-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #006c4922, transparent), 
+                        radial-gradient(circle at bottom left, #07006c22, transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased overflow-x-hidden">
+<!-- Top Navigation Bar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm">
+<div class="max-w-container-max mx-auto px-lg flex justify-between items-center h-20">
+<div class="flex items-center gap-sm">
+<img alt="Finovo Logo" class="h-10 w-10 object-contain rounded-md" src="https://lh3.googleusercontent.com/aida/AP1WRLuaoWa8AOzwEX_wWeKul7URYxQI2CANFtAdZyQQn5EbBuBpA86l-_c6laMkJlecXUc6Q-cuCvHhk09a9Zf4hD4Eqyx_5eQupwEhmlahiMrAE36T2pjHYm9L5FN5p5doSfSLWwe2DWdpu4gR2WfKL7xm-wXnz72DRcEs2Lge8e0vZw1KhGagHsguOIwgMbn5ie2ytcTdA4wPeR6BGoBWUSCVw_475UUalXtAcFewN6J67CtPA7RcCVKDfi8J"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">Finovo</span>
+</div>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center gap-xl">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#udhaar">Udhaar Book</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#reporting">Reporting</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#faq">FAQ</a>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-xl hover:translate-y-[-2px] transition-transform shadow-sm">
+                Get Started
+            </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative overflow-hidden hero-gradient py-2xl md:py-[120px]">
+<div class="max-w-container-max mx-auto px-lg grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div class="z-10">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-lg">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                        100% FREE FOREVER • NO SUBSCRIPTIONS
+                    </div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-md leading-tight">
+                        Finovo - Money Manager &amp; Udhaar Book
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-xl">
+                        Manage Expenses, Budgets, Savings Goals, and Credit/Debit Ledgers in One Powerful App. Experience precision financial control without the hidden charges.
+                    </p>
+<div class="flex flex-wrap gap-md">
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-xl py-md rounded-full hover:emerald-glow transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined">play_arrow</span>
+                            Google Play
+                        </button>
+<button class="border border-outline text-primary font-label-md text-label-md px-xl py-md rounded-full hover:bg-surface-container transition-all">
+                            Learn More
+                        </button>
+</div>
+</div>
+<!-- Hero Visual (Interactive Glass Elements) -->
+<div class="relative flex justify-center">
+<div class="relative w-full max-w-md aspect-square">
+<!-- Simulated App Screens -->
+<div class="absolute inset-0 bg-emerald-gradient-start/10 rounded-full blur-[120px] animate-pulse"></div>
+<div class="glass-card absolute top-0 right-0 w-[80%] p-lg rounded-2xl border-white/20 shadow-2xl transform hover:-rotate-1 transition-transform cursor-default z-20">
+<div class="flex justify-between items-center mb-md">
+<span class="font-label-sm text-on-surface-variant">Available Balance</span>
+<span class="material-symbols-outlined text-secondary">visibility</span>
+</div>
+<div class="font-headline-lg text-primary mb-sm">₹ 2,45,850.00</div>
+<div class="w-full bg-surface-container rounded-full h-2 mb-sm">
+<div class="bg-secondary h-2 rounded-full w-[65%]"></div>
+</div>
+<div class="flex justify-between font-label-sm text-outline">
+<span>Monthly Goal</span>
+<span>65% Achieved</span>
+</div>
+</div>
+<div class="glass-card absolute bottom-12 left-0 w-[70%] p-md rounded-2xl border-white/20 shadow-xl z-30 transform hover:rotate-2 transition-transform cursor-default">
+<div class="flex gap-sm items-center mb-sm">
+<div class="w-8 h-8 rounded-lg bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">call_made</span>
+</div>
+<div>
+<div class="font-label-md text-primary">Udhaar Payment</div>
+<div class="text-[10px] text-outline">To: Rajesh Kumar</div>
+</div>
+<div class="ml-auto font-label-md text-error">- ₹ 5,000</div>
+</div>
+<div class="flex gap-sm items-center">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">call_received</span>
+</div>
+<div>
+<div class="font-label-md text-primary">Income Recieved</div>
+<div class="text-[10px] text-outline">From: Freelance Project</div>
+</div>
+<div class="ml-auto font-label-md text-secondary">+ ₹ 12,000</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features Section -->
+<section class="py-2xl bg-white" id="features">
+<div class="max-w-container-max mx-auto px-lg">
+<div class="text-center mb-2xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Powerful Core Features</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Everything you need to master your personal and business finances in a single interface.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg h-auto lg:h-[700px]">
+<!-- Feature 1: Expense & Budget -->
+<div class="md:col-span-8 glass-card bg-surface-container-low rounded-2xl p-xl flex flex-col justify-between overflow-hidden relative group border-outline-variant hover:border-secondary transition-all">
+<div class="z-10">
+<div class="w-12 h-12 rounded-xl bg-secondary text-on-secondary flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Expense &amp; Budget Management</h3>
+<p class="text-on-surface-variant max-w-md">Precision tracking with custom categories, income monitoring, and real-time net balance calculations.</p>
+</div>
+<div class="mt-xl grid grid-cols-2 md:grid-cols-4 gap-md z-10">
+<div class="p-md bg-white/50 rounded-xl">
+<div class="text-secondary font-bold text-headline-sm mb-xs">₹ 45k</div>
+<div class="text-label-sm text-outline">Monthly Cap</div>
+</div>
+<div class="p-md bg-white/50 rounded-xl">
+<div class="text-emerald-deep font-bold text-headline-sm mb-xs">82%</div>
+<div class="text-label-sm text-outline">Budget Used</div>
+</div>
+<div class="p-md bg-white/50 rounded-xl">
+<div class="text-primary font-bold text-headline-sm mb-xs">12+</div>
+<div class="text-label-sm text-outline">Categories</div>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Feature 2: Reports -->
+<div class="md:col-span-4 bg-primary text-on-primary rounded-2xl p-xl flex flex-col justify-between hover:translate-y-[-4px] transition-transform shadow-lg">
+<div>
+<div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary-fixed">bar_chart</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-sm">Reports &amp; Analytics</h3>
+<p class="text-primary-fixed-dim text-body-md">Visualize growth with professional statements, pie charts, and one-click PDF exports.</p>
+</div>
+<div class="mt-xl border-t border-white/10 pt-lg">
+<button class="flex items-center gap-sm text-secondary-fixed font-label-md group">
+                                View Sample Report
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Feature 3: Udhaar Book -->
+<div class="md:col-span-6 bg-surface-container rounded-2xl p-xl border border-outline-variant hover:border-secondary-container transition-all" id="udhaar">
+<div class="flex items-start justify-between mb-xl">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Digital Udhaar Book</h3>
+<p class="text-on-surface-variant">Manage Party Ledgers with GST compliance and automated WhatsApp reminders.</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[40px]">group</span>
+</div>
+<div class="space-y-md">
+<div class="flex items-center gap-md p-md bg-white rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center font-bold">AK</div>
+<div class="flex-1">
+<div class="text-label-md font-bold">Amit Kumar</div>
+<div class="text-[10px] text-outline">Last payment 2 days ago</div>
+</div>
+<div class="text-error font-bold text-label-md">You Give: ₹2,400</div>
+<button class="bg-secondary/10 p-sm rounded-lg text-secondary">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Feature 4: Advanced Experience -->
+<div class="md:col-span-6 glass-card bg-surface-container-highest rounded-2xl p-xl border border-outline-variant overflow-hidden">
+<div class="flex h-full flex-col justify-center">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Elite Performance UI</h3>
+<div class="grid grid-cols-2 gap-lg">
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-secondary">fingerprint</span>
+<span class="font-label-md">Bio-metric Lock</span>
+</div>
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-secondary">dark_mode</span>
+<span class="font-label-md">Native Dark Mode</span>
+</div>
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-secondary">tablet_mac</span>
+<span class="font-label-md">Tablet Optimized</span>
+</div>
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-secondary">cloud_off</span>
+<span class="font-label-md">Full Offline Support</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Section -->
+<section class="py-2xl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-lg">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2xl items-center">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg order-2 lg:order-1">
+<div class="bg-white p-xl rounded-2xl shadow-sm border border-outline-variant">
+<div class="text-secondary mb-md">
+<span class="material-symbols-outlined text-[32px]">favorite</span>
+</div>
+<h4 class="font-bold text-primary mb-sm">100% Free Forever</h4>
+<p class="text-sm text-on-surface-variant">No subscription traps. No premium locks. Every single feature is free for a lifetime.</p>
+</div>
+<div class="bg-white p-xl rounded-2xl shadow-sm border border-outline-variant">
+<div class="text-secondary mb-md">
+<span class="material-symbols-outlined text-[32px]">sync_alt</span>
+</div>
+<h4 class="font-bold text-primary mb-sm">Dual Management</h4>
+<p class="text-sm text-on-surface-variant">The only app that seamlessly blends personal expense tracking with business credit ledgers.</p>
+</div>
+<div class="bg-white p-xl rounded-2xl shadow-sm border border-outline-variant">
+<div class="text-secondary mb-md">
+<span class="material-symbols-outlined text-[32px]">security</span>
+</div>
+<h4 class="font-bold text-primary mb-sm">Offline First</h4>
+<p class="text-sm text-on-surface-variant">Your data stays on your device. Work completely offline with zero dependency on the internet.</p>
+</div>
+<div class="bg-white p-xl rounded-2xl shadow-sm border border-outline-variant">
+<div class="text-secondary mb-md">
+<span class="material-symbols-outlined text-[32px]">auto_awesome</span>
+</div>
+<h4 class="font-bold text-primary mb-sm">Material 3 Design</h4>
+<p class="text-sm text-on-surface-variant">A cutting-edge interface that adapts to your style, following Google's latest design principles.</p>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Why Switch to Finovo?</h2>
+<p class="text-body-lg text-on-surface-variant mb-xl">Most finance apps charge for 'Premium' features like PDF exports or multi-ledger. At Finovo, we believe financial clarity should be accessible to everyone—without a monthly bill.</p>
+<div class="space-y-md">
+<div class="flex items-center gap-md">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]" style="font-variation-settings: 'FILL' 1">check</span>
+</div>
+<span class="font-label-md">Zero hidden charges or data selling</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]" style="font-variation-settings: 'FILL' 1">check</span>
+</div>
+<span class="font-label-md">Military-grade bio-metric security</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]" style="font-variation-settings: 'FILL' 1">check</span>
+</div>
+<span class="font-label-md">One-tap WhatsApp reminders for debtors</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-2xl overflow-hidden">
+<div class="max-w-container-max mx-auto px-lg">
+<h2 class="font-headline-lg text-headline-lg text-center mb-2xl">Loved by 100k+ Users</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="p-xl bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex gap-1 text-secondary mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-xl">"Finally, an app that doesn't ask for a subscription after 10 entries. The Udhaar book is a lifesaver for my small shop."</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-bold">SM</div>
+<div>
+<div class="font-bold">Suresh Mishra</div>
+<div class="text-xs text-outline">Small Business Owner</div>
+</div>
+</div>
+</div>
+<div class="p-xl bg-primary text-on-primary rounded-2xl flex flex-col justify-between scale-105 shadow-2xl">
+<div>
+<div class="flex gap-1 text-secondary-fixed mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+<p class="text-primary-fixed-dim italic mb-xl">"The cleanest UI I've seen in a long time. The dual management of personal and credit ledgers is exactly what I needed. Highly recommended!"</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center font-bold">PD</div>
+<div>
+<div class="font-bold">Priya Das</div>
+<div class="text-xs text-outline-variant">Freelance Designer</div>
+</div>
+</div>
+</div>
+<div class="p-xl bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex gap-1 text-secondary mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-xl">"The PDF reports are professional enough to share with my accountant. Can't believe this is free forever."</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-bold">AK</div>
+<div>
+<div class="font-bold">Ankit Kapoor</div>
+<div class="text-xs text-outline">Project Manager</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-2xl bg-surface" id="faq">
+<div class="max-w-3xl mx-auto px-lg">
+<h2 class="font-headline-lg text-headline-lg text-center mb-2xl">Frequently Asked Questions</h2>
+<div class="space-y-md">
+<div class="glass-card bg-white rounded-xl p-lg border border-outline-variant cursor-pointer group" onclick="this.querySelector('.faq-content').classList.toggle('hidden')">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-primary">Is Finovo really 100% free forever?</h4>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors">expand_more</span>
+</div>
+<div class="faq-content hidden mt-md text-on-surface-variant text-sm">
+                            Yes, absolutely. We designed Finovo as a community-first tool. There are no subscriptions, no hidden charges, and no feature-locking. All current and future core updates will remain free.
+                        </div>
+</div>
+<div class="glass-card bg-white rounded-xl p-lg border border-outline-variant cursor-pointer group" onclick="this.querySelector('.faq-content').classList.toggle('hidden')">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-primary">Does it support offline management?</h4>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors">expand_more</span>
+</div>
+<div class="faq-content hidden mt-md text-on-surface-variant text-sm">
+                            Finovo is built to work completely offline. Your data resides on your device, ensuring maximum privacy and the ability to manage finances even without an internet connection.
+                        </div>
+</div>
+<div class="glass-card bg-white rounded-xl p-lg border border-outline-variant cursor-pointer group" onclick="this.querySelector('.faq-content').classList.toggle('hidden')">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-primary">Can I manage both personal and business accounts?</h4>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors">expand_more</span>
+</div>
+<div class="faq-content hidden mt-md text-on-surface-variant text-sm">
+                            Yes! Our hybrid architecture allows you to toggle between personal expense tracking and the Udhaar Book (Party Ledger) within the same app, keeping your finances organized but distinct.
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-2xl">
+<div class="max-w-container-max mx-auto px-lg">
+<div class="bg-secondary p-2xl rounded-3xl text-center relative overflow-hidden emerald-glow">
+<div class="absolute inset-0 bg-white/5 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-secondary mb-md relative z-10">Take Control of Your Wealth Today</h2>
+<p class="text-secondary-fixed max-w-2xl mx-auto mb-xl relative z-10 text-lg">Join over 100,000+ users who are managing their wealth with Finovo. 100% Free. Forever.</p>
+<div class="flex justify-center gap-md relative z-10">
+<button class="bg-white text-secondary font-bold px-2xl py-md rounded-full shadow-lg hover:scale-105 transition-transform flex items-center gap-sm">
+                            Download Now
+                            <span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-background border-t border-outline-variant py-2xl">
+<div class="max-w-container-max mx-auto px-lg grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div class="flex flex-col gap-md">
+<div class="flex items-center gap-sm">
+<img alt="Finovo Footer Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLuaoWa8AOzwEX_wWeKul7URYxQI2CANFtAdZyQQn5EbBuBpA86l-_c6laMkJlecXUc6Q-cuCvHhk09a9Zf4hD4Eqyx_5eQupwEhmlahiMrAE36T2pjHYm9L5FN5p5doSfSLWwe2DWdpu4gR2WfKL7xm-wXnz72DRcEs2Lge8e0vZw1KhGagHsguOIwgMbn5ie2ytcTdA4wPeR6BGoBWUSCVw_475UUalXtAcFewN6J67CtPA7RcCVKDfi8J"/>
+<span class="font-headline-sm text-headline-sm font-black text-emerald-deep">Finovo Luxe</span>
+</div>
+<p class="text-on-surface-variant max-w-sm">
+                    © 2024 Finovo Luxe. 100% Free Forever. No Subscriptions. Your partner in wealth empowerment and financial precision.
+                </p>
+</div>
+<div class="flex flex-wrap md:justify-end gap-xl">
+<div class="space-y-sm">
+<h5 class="font-bold text-primary">Legal</h5>
+<ul class="space-y-xs text-sm text-on-surface-variant">
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<h5 class="font-bold text-primary">Support</h5>
+<ul class="space-y-xs text-sm text-on-surface-variant">
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">FAQ</a></li>
+<li><a class="hover:underline hover:text-emerald-deep transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                observer.observe(section);
+            });
+        });
+    </script>
+</body></html>
